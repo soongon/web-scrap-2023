@@ -19,6 +19,9 @@ driver\
     .find_element(by=By.CSS_SELECTOR, value='#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input')\
     .send_keys('1q2w3e4r##', Keys.ENTER)
 time.sleep(2)
+driver.get('https://mail.google.com/mail/u/0/#inbox')
+time.sleep(2)
 html = driver.page_source
 print(html)
+time.sleep(3)
 driver.close()
