@@ -8,7 +8,7 @@ headers = {
 }
 
 res = requests.get('https://www.melon.com/chart/index.htm', headers=headers)
-soup = BeautifulSoup(res.text, 'html.parser')
+soup = BeautifulSoup(res.text, 'lxml')
 
 trs = soup.select('#lst50')
 
@@ -24,4 +24,5 @@ for tr in trs:
 # pprint.pprint(song_list)
 df = pd.DataFrame(song_list)
 df.to_excel('melon_1_50.xlsx', index=False, header=['순위', '제목', '아티스트', '앨범명'])
+
 print('job completed..')
