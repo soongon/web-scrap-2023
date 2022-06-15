@@ -43,7 +43,7 @@ def main():
         print(products_page)
         products_total.extend(products_page)
 
-    print(products_total)
+    # print(products_total)
     df = pd.DataFrame(products_total)
     df.to_excel('ssg.xlsx')
     print('ok..')
