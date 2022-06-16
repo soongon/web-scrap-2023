@@ -1,5 +1,5 @@
 import time
-
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -53,8 +53,13 @@ write_mail_action = ActionChains(driver)
     .perform()
 )
 
-
-
-time.sleep(5)
-
+# 인박스에 메일을 스크래핑 하기위해 현재 페이지의 소스를 가져온다.
+time.sleep(2)
+html = driver.page_source
+# 파싱을 위한 뷰티풀숩 객체로 만든다. 드라이버(웹브라우저)는 종료
+soup = BeautifulSoup(html, 'lxml')
 driver.close()
+
+tags = soup.select_one('#\:98')
+
+print(len(tags))
