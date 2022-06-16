@@ -7,6 +7,10 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+options.add_argument('window-size=1920x1080')
+
 # 웹드라이버(웹 브라우저) 시동 // wait 만들어준다.
 driver = webdriver.Chrome('./chromedriver')
 wait = WebDriverWait(driver, timeout=5)
@@ -15,6 +19,7 @@ wait = WebDriverWait(driver, timeout=5)
 driver.get('https://accounts.google.com/')
 
 # 아이디를 치고 넥스트 버튼을 클릭
+time.sleep(2)
 driver.find_element(By.CSS_SELECTOR, '#identifierId').send_keys('ksoongon97')
 time.sleep(0.5)
 driver.find_element(By.CSS_SELECTOR, '#identifierNext > div > button').click()
@@ -31,6 +36,7 @@ login_chain.send_keys('1q2w3e4r##').key_down(Keys.ENTER).perform()
 login_chain.reset_actions()
 
 # 지메일 화면으로 이동
+print('지메일 화면으로 이동')
 time.sleep(3)
 driver.get('https://mail.google.com/mail/u/0/#inbox')
 
@@ -40,6 +46,8 @@ driver.find_element(By.XPATH, '/html/body/div[7]/div[3]/div/div[2]/div[1]/div[1]
 
 # 메일쓰기 수행
 time.sleep(2)
+driver.get_screenshot_as_file('gmail.png')
+print('screenshot ok..')
 write_mail_action = ActionChains(driver)
 (
     write_mail_action
@@ -52,6 +60,7 @@ write_mail_action = ActionChains(driver)
     .key_down(Keys.ENTER)
     .perform()
 )
+print('메일쓰기 완료')
 
 # 인박스에 메일을 스크래핑 하기위해 현재 페이지의 소스를 가져온다.
 time.sleep(2)
@@ -60,6 +69,4 @@ html = driver.page_source
 soup = BeautifulSoup(html, 'lxml')
 driver.close()
 
-tags = soup.select_one('#\:98')
-
-print(len(tags))
+print(soup)
