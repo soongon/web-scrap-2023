@@ -38,6 +38,21 @@ driver.get('https://mail.google.com/mail/u/0/#inbox')
 time.sleep(3)
 driver.find_element(By.XPATH, '/html/body/div[7]/div[3]/div/div[2]/div[1]/div[1]/div[1]/div/div/div/div[1]/div/div').click()
 
+# 메일쓰기 수행
+time.sleep(2)
+write_mail_action = ActionChains(driver)
+(
+    write_mail_action
+    .send_keys('ksoongon97@gmail.com')        # 보내는 사람
+    .key_down(Keys.TAB).key_down(Keys.TAB)    # 다음으로 탭 두번 쳐 줘야됨
+    .send_keys('제목입니다2.')
+    .key_down(Keys.TAB)
+    .send_keys('본문입니다.')
+    .key_down(Keys.TAB)
+    .key_down(Keys.ENTER)
+    .perform()
+)
+
 
 
 time.sleep(5)
